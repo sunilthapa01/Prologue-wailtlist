@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p /home/sunil/Desktop/PrologueWaitlist/app /home/sunil/Desktop/PrologueWaitlist/components && ls /home/sunil/Desktop/PrologueWaitlist/)",
+      "Bash(npm install *)",
+      "Bash(xargs python3 -c \"import json,sys; d=json.load\\(open\\(sys.argv[1]\\)\\); print\\([k for k in d.keys\\(\\) if 'Instrument' in k]\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)",
+      "Bash(curl -s http://localhost:3001)",
+      "Bash(pkill -f \"next dev\")"
+    ],
+    "additionalDirectories": [
+      "/home/sunil/Desktop/PrologueWaitlist"
+    ]
+  }
+}

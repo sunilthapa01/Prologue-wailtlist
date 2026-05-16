@@ -1,0 +1,110 @@
+import Nav from '@/components/Nav'
+import { WaitlistCount } from '@/components/WaitlistForm'
+import WaitlistForm from '@/components/WaitlistForm'
+import DerivativeDemo from '@/components/DerivativeDemo'
+import PhoneShowcase from '@/components/PhoneShowcase'
+import CompareSection from '@/components/CompareSection'
+import HowItWorks from '@/components/HowItWorks'
+import Gallery from '@/components/Gallery'
+import FounderNote from '@/components/FounderNote'
+import Footer from '@/components/Footer'
+
+export default function Home() {
+  return (
+    <>
+      <Nav />
+
+      {/* ── Hero ──────────────────────────────────────────────── */}
+      <header className="py-[72px_0_56px] pt-[72px] pb-14 relative">
+        <div className="max-w-[1080px] mx-auto px-7">
+          {/* Eyebrow */}
+          <div className="inline-flex items-center gap-[10px] font-body text-xs font-medium tracking-[1.8px] uppercase text-muted mb-7">
+            <span className="w-[7px] h-[7px] rounded-full bg-brand shadow-[0_0_0_4px_rgba(193,63,37,0.16)]" />
+            Interactive learning, for any concept
+          </div>
+
+          {/* Headline */}
+          <h1 className="font-display font-normal text-[clamp(48px,8vw,96px)] leading-[0.96] tracking-[-1.5px] m-0 mb-[26px] text-ink [text-wrap:balance]">
+            Understand anything
+            <br />
+            by <em className="italic text-brand">touching</em> it.
+          </h1>
+
+          {/* Lede */}
+          <p className="font-display text-[clamp(20px,2.2vw,26px)] leading-snug text-ink-soft max-w-[580px] mb-10 [text-wrap:pretty]">
+            Type any concept you don&apos;t quite grasp — at any grade, in any
+            subject. Prologue generates a living, touchable visual you can drag,
+            pull, and manipulate until the idea clicks.
+          </p>
+
+          {/* Hero waitlist form */}
+          <WaitlistForm
+            formId="hero-form"
+            inputId="hero-email"
+            successId="hero-success"
+            submitLabel="Join the waitlist"
+            successMessage="We'll email you the moment your spot opens up. No spam, promise."
+          />
+
+          {/* Meta line */}
+          <div className="flex items-center gap-[18px] flex-wrap mt-[18px] font-body text-[13px] text-muted">
+            <div className="inline-flex items-center">
+              <span className="w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-brand to-[#E88566] font-body text-[10px] font-semibold grid place-items-center text-white" />
+              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#2D5C8F] to-[#6B9BD1] font-body text-[10px] font-semibold grid place-items-center text-white" />
+              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#4A6B3E] to-[#8FB572] font-body text-[10px] font-semibold grid place-items-center text-white" />
+              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#6B4A8B] to-[#A98BC8] font-body text-[10px] font-semibold grid place-items-center text-white" />
+            </div>
+            <span>
+              <WaitlistCount className="text-ink font-semibold" /> learners already waiting
+            </span>
+            <span className="opacity-60">·</span>
+            <span>Early access spring 2026</span>
+          </div>
+
+          {/* Live derivative demo */}
+          <DerivativeDemo />
+        </div>
+      </header>
+
+      {/* ── Device Showcase ───────────────────────────────────── */}
+      <PhoneShowcase />
+
+      {/* ── Compare strip ─────────────────────────────────────── */}
+      <CompareSection />
+
+      {/* ── How It Works ──────────────────────────────────────── */}
+      <HowItWorks />
+
+      {/* ── Examples Gallery ──────────────────────────────────── */}
+      <Gallery />
+
+      {/* ── Founder Note ──────────────────────────────────────── */}
+      <FounderNote />
+
+      {/* ── Final CTA ─────────────────────────────────────────── */}
+      <section className="text-center pt-[120px] pb-[100px]" id="join">
+        <div className="max-w-[720px] mx-auto px-7">
+          <h2 className="font-display font-normal text-[clamp(48px,7vw,88px)] leading-[0.95] tracking-[-1.5px] mb-[28px] [text-wrap:balance]">
+            Be one of the first
+            <br />
+            to <em className="italic text-brand">understand</em>.
+          </h2>
+          <p className="font-display text-[clamp(20px,2.2vw,26px)] leading-snug text-ink-soft mx-auto mb-9 [text-wrap:pretty]">
+            Early access opens spring 2026. The first 5,000 learners get a year
+            of Prologue free.
+          </p>
+          <WaitlistForm
+            formId="final-form"
+            inputId="final-email"
+            successId="final-success"
+            submitLabel="Save my spot"
+            successMessage="Welcome. We'll be in touch soon."
+            centered
+          />
+        </div>
+      </section>
+
+      <Footer />
+    </>
+  )
+}

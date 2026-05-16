@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Prologue — Success Modal</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --bg: #F5F1E6;
+    --bg-soft: #ECE5D2;
+    --green-card: #E5EDD8;       /* soft sage for "What happens next?" */
+    --green-icon: #C9D6B5;
+    --green-deep: #4A6B3E;
+    --green-ink:  #3D5A33;
+    --ink: #1B1714;
+    --ink-soft: #3A332C;
+    --mute: #7B7264;
+    --mute-soft: #B6AC9A;
+    --rule: #D9D2BF;
+    --red: #C13F25;
+    --red-deep: #A8351F;
+    --serif: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Geist', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --script: 'Caveat', 'Brush Script MT', cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--red); color: #fff; }
+
+  /* ──────────── Background page (so the modal has context) ──────────── */
+  .bg-page {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    padding: 60px 28px;
+    text-align: center;
+  }
+  .bg-page h1 {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(48px, 7vw, 80px);
+    line-height: 1; letter-spacing: -1.5px;
+    margin: 0 0 18px; max-width: 700px;
+    text-wrap: balance;
+  }
+  .bg-page h1 em { font-style: italic; color: var(--red); }
+  .bg-page p.lede {
+    font-family: var(--serif); font-size: 22px; line-height: 1.4;
+    color: var(--ink-soft); max-width: 520px; margin: 0 auto 30px;
+  }
+  .form {
+    display: flex; gap: 8px; align-items: center;
+    max-width: 460px; margin: 0 auto;
+    padding: 6px 6px 6px 20px;
+    background: #fff; border-radius: 999px;
+    border: 1px solid var(--rule);
+    box-shadow: 0 1px 0 rgba(28,24,21,0.04), 0 18px 36px -22px rgba(28,24,21,0.22);
+  }
+  .form:focus-within {
+    box-shadow: 0 1px 0 rgba(28,24,21,0.04), 0 0 0 4px rgba(193,63,37,0.12);
+  }
+  .form input {
+    flex: 1; min-width: 0; border: 0; outline: 0; background: transparent;
+    font-family: var(--sans); font-size: 16px; color: var(--ink);
+    padding: 14px 0;
+  }
+  .form input::placeholder { color: var(--mute-soft); }
+  .form button {
+    border: 0; cursor: pointer;
+    background: var(--ink); color: #F3EBDA;
+    font-family: var(--sans); font-size: 15px; font-weight: 500;
+    padding: 12px 22px; border-radius: 999px;
+    display: inline-flex; align-items: center; gap: 8px;
+    transition: background .15s, transform .1s;
+  }
+  .form button:hover { background: var(--red); }
+  .form button:active { transform: scale(0.97); }
+
+  .demo-hint {
+    margin-top: 22px;
+    font-family: var(--sans); font-size: 13px; color: var(--mute);
+  }
+  .demo-hint kbd {
+    font-family: var(--sans); font-size: 12px;
+    padding: 3px 8px; border-radius: 6px;
+    background: var(--bg-soft); border: 1px solid var(--rule);
+    color: var(--ink-soft);
+  }
+
+  /* ──────────── MODAL OVERLAY ──────────── */
+  .overlay {
+    position: fixed; inset: 0; z-index: 100;
+    background: rgba(28, 24, 21, 0.42);
+    backdrop-filter: blur(10px) saturate(140%);
+    -webkit-backdrop-filter: blur(10px) saturate(140%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0; pointer-events: none;
+    transition: opacity .45s ease;
+  }
+  .overlay.shown { opacity: 1; pointer-events: auto; }
+
+  /* ──────────── MODAL ──────────── */
+  .modal {
+    position: relative;
+    background: var(--bg);
+    border-radius: 28px;
+    width: 100%;
+    max-width: 1120px;
+    max-height: 92vh;
+    overflow: hidden;
+    box-shadow:
+      0 60px 120px -30px rgba(28, 24, 21, 0.45),
+      0 12px 24px -8px rgba(28, 24, 21, 0.15),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+    opacity: 0;
+    transform: scale(0.94) translateY(24px);
+    transition: opacity .55s ease, transform .7s cubic-bezier(.2, .8, .25, 1);
+  }
+  .overlay.shown .modal {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  /* Close button */
+  .close-btn {
+    position: absolute; top: 18px; right: 18px;
+    width: 38px; height: 38px;
+    border-radius: 50%; border: 0;
+    background: rgba(28,24,21,0.06);
+    color: var(--ink-soft);
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: background .2s, transform .2s, color .2s;
+    z-index: 20;
+  }
+  .close-btn:hover {
+    background: var(--ink); color: #F3EBDA;
+    transform: rotate(90deg) scale(1.05);
+  }
+
+  .modal-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    gap: 0;
+    padding: 56px 60px;
+    align-items: center;
+    overflow-y: auto;
+    max-height: 92vh;
+  }
+
+  /* ──────────── LEFT: copy + card ──────────── */
+  .left-col { padding-right: 36px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--green-deep);
+    font-family: var(--sans); font-size: 15px; font-weight: 500;
+    margin-bottom: 24px;
+    opacity: 0; transform: translateY(8px);
+    animation: fadeUp .55s .35s cubic-bezier(.2, .8, .3, 1) forwards;
+  }
+  .overlay:not(.shown) .badge { animation: none; }
+  .badge .check {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green-card); color: var(--green-deep);
+    display: grid; place-items: center;
+    box-shadow: 0 0 0 0 rgba(74,107,62,0.4);
+    animation: checkPulse 2.6s 1.4s ease-out infinite;
+  }
+  @keyframes checkPulse {
+    0%, 70%, 100% { box-shadow: 0 0 0 0 rgba(74,107,62,0); }
+    35% { box-shadow: 0 0 0 8px rgba(74,107,62,0); }
+    36% { box-shadow: 0 0 0 0 rgba(74,107,62,0.35); }
+  }
+
+  h1.headline {
+    font-family: var(--serif); font-weight: 400;
+    font-size: clamp(44px, 4.4vw, 64px);
+    line-height: 1.02; letter-spacing: -1.2px;
+    margin: 0 0 28px; color: var(--ink);
+    text-wrap: balance;
+    opacity: 0; transform: translateY(14px);
+    animation: fadeUp .65s .45s cubic-bezier(.2, .8, .3, 1) forwards;
+  }
+  h1.headline em { font-style: italic; color: var(--red); }
+
+  .body-copy {
+    font-family: var(--sans); font-size: 16px; line-height: 1.55;
+    color: var(--ink-soft);
+    margin: 0 0 14px; max-width: 460px;
+    opacity: 0; transform: translateY(10px);
+    animation: fadeUp .6s ease-out forwards;
+  }
+  .body-copy:nth-of-type(1) { animation-delay: .55s; }
+  .body-copy:nth-of-type(2) { animation-delay: .65s; margin-bottom: 32px; }
+  .body-copy strong { font-weight: 600; color: var(--ink); }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* "What happens next?" — sage green */
+  .next-card {
+    background: var(--green-card);
+    border-radius: 18px;
+    padding: 24px 28px 22px;
+    max-width: 560px;
+    opacity: 0; transform: translateY(14px);
+    animation: fadeUp .65s .8s cubic-bezier(.2, .8, .3, 1) forwards;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  }
+  .next-header {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--green-deep);
+    font-family: var(--sans); font-size: 15px; font-weight: 600;
+    margin-bottom: 20px;
+    letter-spacing: -0.1px;
+  }
+  .next-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .next-step {
+    display: flex; flex-direction: column;
+    align-items: center; text-align: center;
+    gap: 12px;
+    padding: 4px;
+    border-radius: 12px;
+    transition: transform .25s ease;
+  }
+  .next-step:hover { transform: translateY(-3px); }
+  .next-step:hover .icon { background: var(--green-icon); transform: scale(1.08); }
+  .next-step .icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    background: #D5DEC0;
+    display: grid; place-items: center;
+    color: var(--green-ink);
+    transition: background .2s, transform .25s cubic-bezier(.34, 1.56, .64, 1);
+  }
+  .next-step .label {
+    font-family: var(--sans); font-size: 13px; line-height: 1.42;
+    color: var(--ink-soft); max-width: 130px;
+  }
+
+  /* ──────────── RIGHT: illustration ──────────── */
+  .right-col {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    position: relative;
+  }
+  .envelope-stage {
+    width: 100%; max-width: 480px;
+    aspect-ratio: 1 / 0.94;
+    position: relative;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: stageRise .8s .25s cubic-bezier(.2, .8, .3, 1) forwards;
+  }
+  @keyframes stageRise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .envelope-stage svg { display: block; width: 100%; height: 100%; overflow: visible; }
+
+  /* envelope sub-animations */
+  .env-flap {
+    transform-origin: 270px 250px;        /* hinge along the envelope top edge */
+    animation: flapOpen .85s .85s cubic-bezier(.55, 0, .2, 1) forwards;
+  }
+  @keyframes flapOpen {
+    0%   { transform: scaleY(1); }
+    100% { transform: scaleY(-1); }
+  }
+
+  .env-letter {
+    transform-origin: 270px 280px;
+    animation: letterRise 1.2s 1.4s cubic-bezier(.22, .88, .28, 1) forwards;
+  }
+  @keyframes letterRise {
+    0%   { opacity: 0; transform: translateY(75px); }
+    20%  { opacity: 1; }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  .env-seal {
+    transform-origin: 270px 350px;
+    animation: sealStamp .5s 2.55s cubic-bezier(.34, 1.56, .64, 1) forwards;
+  }
+  @keyframes sealStamp {
+    0%   { opacity: 0; transform: scale(0); }
+    60%  { opacity: 1; transform: scale(1.18); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  .seal-impact-ring {
+    transform-origin: 270px 350px;
+    animation: sealImpact .9s 2.6s ease-out forwards;
+    opacity: 0;
+  }
+  @keyframes sealImpact {
+    0%   { opacity: 0.5; transform: scale(0.4); }
+    100% { opacity: 0; transform: scale(2.6); }
+  }
+
+  .env-body, .env-front {
+    /* envelope rises subtly when flap opens */
+    transform-origin: 270px 420px;
+    animation: envelopeRise .6s .35s cubic-bezier(.2, .8, .3, 1) forwards;
+  }
+  @keyframes envelopeRise {
+    0%   { transform: translateY(6px); }
+    100% { transform: translateY(-4px); }
+  }
+
+  .heart {
+    transform-origin: 270px 295px;
+    animation: heartIn .5s 2.2s cubic-bezier(.34, 1.56, .64, 1) forwards,
+               heartBeat 2.4s 2.9s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes heartIn {
+    0%   { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes heartBeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.14); }
+  }
+
+  /* Particles around the envelope */
+  .particle {
+    transform-origin: center;
+    animation-fill-mode: both;
+  }
+  .p-burst { animation: pBurst 1.4s 2.4s cubic-bezier(.2, .8, .3, 1) forwards; opacity: 0; }
+  @keyframes pBurst {
+    0%   { opacity: 0; transform: translate(0, 0) scale(0.4); }
+    30%  { opacity: 1; }
+    100% { opacity: 0.85; transform: var(--end, translate(40px, -40px)) scale(1); }
+  }
+  .p-float { animation: pFloat 5s 2.5s ease-in-out infinite; }
+  @keyframes pFloat {
+    0%, 100% { transform: translate(0, 0); opacity: 0.6; }
+    50%      { transform: translate(var(--fx, 6px), var(--fy, -10px)); opacity: 1; }
+  }
+
+  .paper-plane {
+    animation: planeFly 4s 2.4s ease-out infinite;
+    transform-origin: center;
+    opacity: 0;
+  }
+  @keyframes planeFly {
+    0%, 100% { transform: translate(0, 0) rotate(0); opacity: 0.95; }
+    50%      { transform: translate(10px, -10px) rotate(8deg); opacity: 1; }
+  }
+
+  .leaf-sway {
+    transform-origin: bottom center;
+    animation: leafIn .8s 1.4s cubic-bezier(.2, .8, .3, 1) forwards,
+               leafSway 6s 2.2s ease-in-out infinite;
+    opacity: 0;
+  }
+  @keyframes leafIn  { to { opacity: 1; } }
+  @keyframes leafSway {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(2deg); }
+  }
+  .leaf-right { animation-name: leafIn, leafSwayR; }
+  @keyframes leafSwayR {
+    0%, 100% { transform: rotate(0deg); }
+    50%      { transform: rotate(-2deg); }
+  }
+
+  /* ──────────── CLOSING SCRIPT ──────────── */
+  .closing {
+    margin-top: 22px;
+    text-align: center;
+    opacity: 0; transform: translateY(10px);
+    animation: fadeUp .7s 2.4s ease-out forwards;
+  }
+  .closing .line1 {
+    font-family: var(--script); font-size: 26px; color: var(--ink-soft);
+    line-height: 1.2;
+  }
+  .closing .line2 {
+    font-family: var(--script); font-size: 30px; color: var(--red);
+    line-height: 1.2; display: inline-block; position: relative;
+    margin-top: 2px;
+  }
+  .closing .line2::after {
+    content: ''; position: absolute;
+    left: 6%; right: 6%; bottom: 4px; height: 6px;
+    background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 8' preserveAspectRatio='none'><path d='M2 5 Q 50 1, 100 4 T 198 3' stroke='%23C13F25' stroke-width='2' fill='none' stroke-linecap='round'/></svg>") no-repeat center / 100% 100%;
+    transform: scaleX(0);
+    transform-origin: left center;
+    animation: underlineDraw .7s 2.9s cubic-bezier(.4, 0, .2, 1) forwards;
+  }
+  @keyframes underlineDraw {
+    to { transform: scaleX(1); }
+  }
+
+  /* ──────────── FOOTER STRIP ──────────── */
+  .modal-foot {
+    border-top: 1px solid var(--rule);
+    padding: 16px 60px;
+    background: rgba(0,0,0,0.01);
+  }
+  .foot-row {
+    display: flex; align-items: center; gap: 16px;
+    font-family: var(--sans); font-size: 13px; color: var(--mute);
+  }
+  .dots { display: inline-flex; }
+  .dots span {
+    width: 14px; height: 14px; border-radius: 50%;
+    margin-left: -5px; border: 2px solid var(--bg);
+  }
+  .dots span:nth-child(1) { background: #C13F25; margin-left: 0; }
+  .dots span:nth-child(2) { background: #E88566; }
+  .dots span:nth-child(3) { background: #2D5C8F; }
+  .dots span:nth-child(4) { background: #6B4A8B; }
+  .dots span:nth-child(5) { background: #4A6B3E; }
+  .foot-row strong { color: var(--ink); font-weight: 600; }
+  .foot-row .sep { color: var(--mute-soft); }
+
+  /* ──────────── EXIT ANIMATION ──────────── */
+  .overlay.closing { opacity: 0; transition: opacity .35s ease; }
+  .overlay.closing .modal {
+    transform: scale(0.96) translateY(12px);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+
+  /* ──────────── RESPONSIVE ──────────── */
+  @media (max-width: 960px) {
+    .modal-body {
+      grid-template-columns: 1fr;
+      padding: 36px 24px 28px;
+      gap: 8px;
+    }
+    .left-col { padding-right: 0; order: 2; }
+    .right-col { order: 1; }
+    .envelope-stage { max-width: 320px; }
+    .modal-foot { padding: 14px 24px; }
+    h1.headline { font-size: 38px; }
+  }
+  @media (max-width: 520px) {
+    .modal { border-radius: 22px; }
+    h1.headline { font-size: 32px; }
+    .next-card { padding: 18px; }
+    .next-step .label { font-size: 12px; }
+    .closing .line1 { font-size: 20px; }
+    .closing .line2 { font-size: 24px; }
+    .foot-row { flex-wrap: wrap; gap: 10px; font-size: 12px; }
+    .modal-foot { padding: 14px 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background context page (so user can see the modal appear over something) -->
+<div class="bg-page">
+  <h1>Understand anything by <em>touching</em> it.</h1>
+  <p class="lede">
+    Join the waitlist. Type any concept — watch it come alive in your hand.
+  </p>
+  <form class="form" id="form" autocomplete="off">
+    <input type="email" name="email" id="email" placeholder="your@email.com" required value="you@example.com" />
+    <button type="submit">
+      Join the waitlist
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </button>
+  </form>
+  <div class="demo-hint">
+    Press <kbd>R</kbd> to replay the success animation
+  </div>
+</div>
+
+<!-- ──────────── MODAL ──────────── -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-labelledby="thank-title" aria-modal="true">
+
+    <button class="close-btn" id="close" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 2l10 10M12 2L2 12"/></svg>
+    </button>
+
+    <div class="modal-body">
+
+      <!-- LEFT -->
+      <div class="left-col">
+        <div class="badge">
+          <span class="check">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7l3 3 5-6"/>
+            </svg>
+          </span>
+          You're in!
+        </div>
+
+        <h1 class="headline" id="thank-title">Thanks for joining the <em>waitlist!</em></h1>
+
+        <p class="body-copy">
+          You've taken the first step toward learning smarter with <strong>Prologue</strong>.
+        </p>
+        <p class="body-copy">
+          We'll notify you as soon as early access opens up. Get ready to turn any concept into clarity.
+        </p>
+
+        <div class="next-card">
+          <div class="next-header">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/>
+            </svg>
+            What happens next?
+          </div>
+          <div class="next-grid">
+            <div class="next-step">
+              <div class="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="M3 7l9 6 9-6"/>
+                </svg>
+              </div>
+              <div class="label">We'll email you when early access is live.</div>
+            </div>
+            <div class="next-step">
+              <div class="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M5 19c0-3 2-5 5-5l5-5a4 4 0 0 1 4 4l-5 5c0 3-2 5-5 5"/>
+                  <path d="M14 6l4 4"/>
+                  <path d="M7 17l-2 2"/>
+                  <path d="M9 19l-2 2"/>
+                </svg>
+              </div>
+              <div class="label">Be among the first to explore Prologue.</div>
+            </div>
+            <div class="next-step">
+              <div class="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-5 9 5-9 5-9-5z"/>
+                  <path d="M7 11v4a5 5 0 0 0 10 0v-4"/>
+                  <path d="M21 9v5"/>
+                </svg>
+              </div>
+              <div class="label">Learn anything by touching it. Literally.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT (illustration) -->
+      <div class="right-col">
+        <div class="envelope-stage" id="stage">
+          <svg viewBox="0 0 540 500" aria-hidden="true">
+
+            <defs>
+              <radialGradient id="splash" cx="0.5" cy="0.5" r="0.55">
+                <stop offset="0%"   stop-color="#F5C9B8" stop-opacity="0.7"/>
+                <stop offset="55%"  stop-color="#F5C9B8" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#F5C9B8" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="env-front" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#E8D7B5"/>
+                <stop offset="100%" stop-color="#D4BE96"/>
+              </linearGradient>
+              <linearGradient id="env-back" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#D4BE96"/>
+                <stop offset="100%" stop-color="#B8A074"/>
+              </linearGradient>
+              <linearGradient id="env-inside" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#9C8259"/>
+                <stop offset="100%" stop-color="#B19668"/>
+              </linearGradient>
+              <linearGradient id="env-flap" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#E0CCA4"/>
+                <stop offset="100%" stop-color="#C7AE82"/>
+              </linearGradient>
+              <radialGradient id="seal-grad" cx="0.3" cy="0.3" r="0.85">
+                <stop offset="0%" stop-color="#D14628"/>
+                <stop offset="60%" stop-color="#A8321B"/>
+                <stop offset="100%" stop-color="#7A2210"/>
+              </radialGradient>
+              <linearGradient id="paper-grad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#FFFBF1"/>
+                <stop offset="100%" stop-color="#F4ECD5"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Watercolor splash -->
+            <ellipse cx="270" cy="270" rx="240" ry="180" fill="url(#splash)"/>
+
+            <!-- Floating tiny stars / sparkles (subtle, always on) -->
+            <g opacity="0.7" fill="#9B8E72">
+              <path class="particle p-float" style="--fx: -4px; --fy: -8px;" d="M70 360 l1.4 -3 l3 -1.4 l-3 -1.4 l-1.4 -3 l-1.4 3 l-3 1.4 l3 1.4 z"/>
+              <path class="particle p-float" style="--fx: 6px; --fy: -6px; animation-delay: 3.6s;" d="M480 380 l1.4 -3 l3 -1.4 l-3 -1.4 l-1.4 -3 l-1.4 3 l-3 1.4 l3 1.4 z"/>
+              <path class="particle p-float" style="--fx: -5px; --fy: -10px; animation-delay: 3.2s;" d="M150 30 l1 -2.2 l2.2 -1 l-2.2 -1 l-1 -2.2 l-1 2.2 l-2.2 1 l2.2 1 z"/>
+              <path class="particle p-float" style="--fx: 4px; --fy: -12px; animation-delay: 4.1s;" d="M410 30 l1 -2.2 l2.2 -1 l-2.2 -1 l-1 -2.2 l-1 2.2 l-2.2 1 l2.2 1 z"/>
+            </g>
+
+            <!-- Confetti burst (radiates outward from envelope when it opens) -->
+            <g transform="translate(270, 290)">
+              <circle class="particle p-burst" style="--end: translate(-190px, -130px); animation-delay: 1.9s;" cx="0" cy="0" r="3"  fill="#C13F25"/>
+              <circle class="particle p-burst" style="--end: translate(-160px, -190px); animation-delay: 2.0s;" cx="0" cy="0" r="2.5" fill="#E88566"/>
+              <circle class="particle p-burst" style="--end: translate(-220px, -50px);  animation-delay: 2.05s;" cx="0" cy="0" r="2.4" fill="#C13F25"/>
+              <circle class="particle p-burst" style="--end: translate(180px, -180px);  animation-delay: 2.0s;" cx="0" cy="0" r="3" fill="#E88566"/>
+              <circle class="particle p-burst" style="--end: translate(210px, -110px);  animation-delay: 2.1s;" cx="0" cy="0" r="2.5" fill="#C13F25"/>
+              <circle class="particle p-burst" style="--end: translate(230px, -10px);   animation-delay: 2.15s;" cx="0" cy="0" r="2" fill="#4A6B3E"/>
+              <line   class="particle p-burst" style="--end: translate(-200px, -70px);  animation-delay: 1.95s;" x1="0" y1="0" x2="8" y2="-2" stroke="#C13F25" stroke-width="2" stroke-linecap="round"/>
+              <line   class="particle p-burst" style="--end: translate(200px, -50px);   animation-delay: 2.0s;" x1="0" y1="0" x2="8" y2="-2" stroke="#4A6B3E" stroke-width="2" stroke-linecap="round"/>
+              <line   class="particle p-burst" style="--end: translate(-110px, -220px); animation-delay: 2.1s;" x1="0" y1="0" x2="-6" y2="3" stroke="#E88566" stroke-width="1.8" stroke-linecap="round"/>
+              <line   class="particle p-burst" style="--end: translate(130px, -220px);  animation-delay: 2.15s;" x1="0" y1="0" x2="6" y2="3" stroke="#4A6B3E" stroke-width="1.8" stroke-linecap="round"/>
+              <path   class="particle p-burst" style="--end: translate(-240px, -10px);  animation-delay: 2.2s;" d="M0 0 l3 -3 l3 3 l-3 3 z" fill="#4A6B3E"/>
+              <path   class="particle p-burst" style="--end: translate(220px, -180px);  animation-delay: 2.05s;" d="M0 0 l3 -3 l3 3 l-3 3 z" fill="#C13F25"/>
+              <circle class="particle p-burst" style="--end: translate(-180px, 30px);   animation-delay: 2.25s;" cx="0" cy="0" r="2" fill="#E88566"/>
+              <circle class="particle p-burst" style="--end: translate(195px, 60px);    animation-delay: 2.3s;"  cx="0" cy="0" r="2.4" fill="#C13F25"/>
+            </g>
+
+            <!-- Paper airplane (outer translates, inner animates) -->
+            <g transform="translate(440, 70)">
+              <g class="paper-plane" style="animation-delay: 2.0s;">
+                <path d="M 0 0 L 38 -8 L 22 8 L 14 4 Z" fill="#FFFBF1" stroke="#1B1714" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M 14 4 L 22 8 L 18 16 Z" fill="#E5D8B7" stroke="#1B1714" stroke-width="1.3" stroke-linejoin="round"/>
+                <path d="M 22 8 L 38 -8" stroke="#1B1714" stroke-width="1.1" fill="none"/>
+                <path d="M -4 2 Q -18 -4 -28 4 Q -36 12 -50 4" fill="none" stroke="#9B8E72" stroke-width="1.4" stroke-linecap="round" stroke-dasharray="2 4"/>
+              </g>
+            </g>
+
+            <!-- Leafy sprig — LEFT (outer translates, inner sways) -->
+            <g transform="translate(85, 290)">
+            <g class="leaf-sway">
+              <path d="M 0 100 Q -10 60 -20 20 Q -25 0 -30 -20" fill="none" stroke="#5A7A4A" stroke-width="2" stroke-linecap="round"/>
+              <g fill="#7BA563" stroke="#5A7A4A" stroke-width="1">
+                <ellipse cx="-8" cy="80" rx="10" ry="5" transform="rotate(-30 -8 80)"/>
+                <ellipse cx="-22" cy="60" rx="11" ry="5" transform="rotate(40 -22 60)"/>
+                <ellipse cx="-18" cy="38" rx="10" ry="4.5" transform="rotate(-30 -18 38)"/>
+                <ellipse cx="-30" cy="18" rx="11" ry="5" transform="rotate(45 -30 18)"/>
+                <ellipse cx="-32" cy="-6" rx="9" ry="4" transform="rotate(-25 -32 -6)"/>
+                <ellipse cx="-40" cy="-20" rx="8" ry="4" transform="rotate(35 -40 -20)"/>
+              </g>
+              <path d="M 10 100 Q 20 70 35 50 Q 50 30 60 10" fill="none" stroke="#5A7A4A" stroke-width="2" stroke-linecap="round"/>
+              <g fill="#8FB572" stroke="#5A7A4A" stroke-width="1">
+                <ellipse cx="22" cy="78" rx="9" ry="4" transform="rotate(40 22 78)"/>
+                <ellipse cx="38" cy="58" rx="10" ry="4.5" transform="rotate(-35 38 58)"/>
+                <ellipse cx="52" cy="36" rx="9" ry="4" transform="rotate(45 52 36)"/>
+                <ellipse cx="64" cy="14" rx="8" ry="3.5" transform="rotate(-30 64 14)"/>
+              </g>
+            </g>
+            </g>
+
+            <!-- Leafy sprig — RIGHT (outer translates, inner sways) -->
+            <g transform="translate(455, 290)">
+            <g class="leaf-sway leaf-right">
+              <path d="M 0 100 Q 10 60 20 20 Q 25 0 30 -20" fill="none" stroke="#5A7A4A" stroke-width="2" stroke-linecap="round"/>
+              <g fill="#7BA563" stroke="#5A7A4A" stroke-width="1">
+                <ellipse cx="8" cy="80" rx="10" ry="5" transform="rotate(30 8 80)"/>
+                <ellipse cx="22" cy="60" rx="11" ry="5" transform="rotate(-40 22 60)"/>
+                <ellipse cx="18" cy="38" rx="10" ry="4.5" transform="rotate(30 18 38)"/>
+                <ellipse cx="30" cy="18" rx="11" ry="5" transform="rotate(-45 30 18)"/>
+                <ellipse cx="32" cy="-6" rx="9" ry="4" transform="rotate(25 32 -6)"/>
+                <ellipse cx="40" cy="-20" rx="8" ry="4" transform="rotate(-35 40 -20)"/>
+              </g>
+              <path d="M -10 100 Q -20 70 -35 50 Q -50 30 -60 10" fill="none" stroke="#5A7A4A" stroke-width="2" stroke-linecap="round"/>
+              <g fill="#8FB572" stroke="#5A7A4A" stroke-width="1">
+                <ellipse cx="-22" cy="78" rx="9" ry="4" transform="rotate(-40 -22 78)"/>
+                <ellipse cx="-38" cy="58" rx="10" ry="4.5" transform="rotate(35 -38 58)"/>
+                <ellipse cx="-52" cy="36" rx="9" ry="4" transform="rotate(-45 -52 36)"/>
+                <ellipse cx="-64" cy="14" rx="8" ry="3.5" transform="rotate(30 -64 14)"/>
+              </g>
+            </g>
+            </g>
+
+            <!-- ENVELOPE — back panel (deepest) -->
+            <g class="env-body">
+              <path d="M 140 250 L 400 250 L 400 420 L 140 420 Z" fill="url(#env-inside)" stroke="#7A6549" stroke-width="2" stroke-linejoin="round"/>
+            </g>
+
+            <!-- ENVELOPE FLAP (above body, BEHIND letter — folds open) -->
+            <g class="env-flap">
+              <path d="M 140 250 L 400 250 L 270 350 Z" fill="url(#env-flap)" stroke="#9B8055" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M 140 250 L 270 350 L 400 250" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="1"/>
+            </g>
+
+            <!-- LETTER (above body & flap, BEHIND front pocket — mostly inside envelope, top peeks out) -->
+            <g class="env-letter">
+              <!-- subtle shadow -->
+              <path d="M 168 140 L 372 140 L 372 410 L 168 410 Z" fill="rgba(28,24,21,0.12)" transform="translate(2, 4)"/>
+              <!-- paper -->
+              <path d="M 168 140 L 372 140 L 372 410 L 168 410 Z" fill="url(#paper-grad)" stroke="#C7B58A" stroke-width="1.5" stroke-linejoin="round"/>
+
+              <!-- letter content (positioned in the visible upper portion + V-notch) -->
+              <text x="270" y="195" text-anchor="middle" font-family="Instrument Serif, serif" font-size="26" fill="#1B1714" letter-spacing="-0.3">
+                You're on the list!
+              </text>
+              <text x="270" y="240" text-anchor="middle" font-family="Instrument Serif, serif" font-style="italic" font-size="20" fill="#C13F25">
+                <tspan x="270" dy="0">Big things are coming</tspan>
+                <tspan x="270" dy="26">your way.</tspan>
+              </text>
+
+              <!-- Heart — sits in the V-notch area, above the seal -->
+              <g transform="translate(259, 285)">
+                <g class="heart">
+                  <path d="M 11 18 C 11 18 0 11 0 5 C 0 2 2 0 5 0 C 8 0 11 3 11 3 C 11 3 14 0 17 0 C 20 0 22 2 22 5 C 22 11 11 18 11 18 Z"
+                        fill="#C13F25" stroke="#7A2210" stroke-width="1.2" stroke-linejoin="round"/>
+                </g>
+              </g>
+            </g>
+
+            <!-- ENVELOPE FRONT POCKET (covers the bottom of the letter) -->
+            <g class="env-front">
+              <path d="M 140 420 L 140 250 L 270 350 L 400 250 L 400 420 Z" fill="url(#env-front)" stroke="#9B8055" stroke-width="2" stroke-linejoin="round"/>
+              <!-- V crease shadow -->
+              <path d="M 140 250 L 270 350 L 400 250" fill="none" stroke="rgba(0,0,0,0.14)" stroke-width="1.4"/>
+            </g>
+
+            <!-- WAX SEAL at V-tip (outer translates, inner stamps in) -->
+            <circle class="seal-impact-ring" cx="270" cy="350" r="30" fill="none" stroke="#C13F25" stroke-width="2" opacity="0"/>
+            <g transform="translate(270, 350)">
+              <g class="env-seal">
+                <path d="M 0 -28 C 16 -28, 30 -16, 30 0
+                         C 30 16, 18 28, 2 28
+                         C -16 30, -30 16, -30 0
+                         C -30 -16, -16 -30, 0 -28 Z"
+                      fill="url(#seal-grad)" stroke="#5A1808" stroke-width="1.5"/>
+                <circle r="22" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="0.8"/>
+                <text y="8" text-anchor="middle" font-family="Instrument Serif, serif" font-size="26" font-style="italic" fill="#F5E5C8" font-weight="400">P</text>
+                <ellipse cx="-9" cy="-12" rx="6" ry="4" fill="rgba(255,255,255,0.20)"/>
+              </g>
+            </g>
+
+          </svg>
+        </div>
+
+        <div class="closing">
+          <div class="line1">Until then, keep being curious.</div>
+          <div class="line2">The best ideas are just a touch away.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="modal-foot">
+      <div class="foot-row">
+        <span class="dots"><span></span><span></span><span></span><span></span><span></span></span>
+        <span><strong>2,847</strong> learners already waiting</span>
+        <span class="sep">·</span>
+        <span>Early access spring 2026</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('overlay');
+  const closeBtn = document.getElementById('close');
+  const form = document.getElementById('form');
+
+  function openModal() {
+    // Reset animations by re-cloning the modal-body content
+    // (simplest: remove + re-add the `shown` class restarts CSS animations
+    //  for elements newly attached, but we want to restart for existing ones too)
+    overlay.classList.remove('closing');
+    // Force reflow + reapply animations by toggling a data attribute
+    const stage = document.getElementById('stage');
+    const clone = stage.cloneNode(true);
+    stage.replaceWith(clone);
+    // Same trick for all elements that have one-shot keyframe animations
+    document.querySelectorAll('.badge, .headline, .body-copy, .next-card, .closing').forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;             // force reflow
+      el.style.animation = '';
+    });
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('shown');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    overlay.classList.add('closing');
+    overlay.classList.remove('shown');
+    setTimeout(() => {
+      overlay.classList.remove('closing');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }, 380);
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    openModal();
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('shown')) closeModal();
+    if (e.key === 'r' || e.key === 'R') {
+      if (overlay.classList.contains('shown')) {
+        closeModal();
+        setTimeout(openModal, 500);
+      } else {
+        openModal();
+      }
+    }
+  });
+
+  // Auto-open on first load so the user lands on the showcase
+  setTimeout(openModal, 350);
+</script>
+
+</body>
+</html>
