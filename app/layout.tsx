@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Instrument_Serif } from 'next/font/google'
+import { Instrument_Serif, Caveat } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import './globals.css'
@@ -9,6 +9,13 @@ const instrumentSerif = Instrument_Serif({
   weight: ['400'],
   style: ['normal', 'italic'],
   variable: '--font-instrument-serif',
+  display: 'swap',
+})
+
+const caveat = Caveat({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-caveat',
   display: 'swap',
 })
 
@@ -26,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable}`}
+      className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable}`}
     >
       <body className="bg-parchment text-ink font-body">{children}</body>
     </html>

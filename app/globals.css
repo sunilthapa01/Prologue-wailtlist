@@ -52,6 +52,74 @@ body {
   animation: pulse 1.6s ease-out infinite;
 }
 
+/* ── Success modal keyframes ──────────────────────────────── */
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes stageRise {
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes flapOpen {
+  0%   { transform: scaleY(1); }
+  100% { transform: scaleY(-1); }
+}
+@keyframes letterRise {
+  0%   { opacity: 0; transform: translateY(75px); }
+  20%  { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0px); }
+}
+@keyframes sealStamp {
+  0%   { opacity: 0; transform: scale(0); }
+  60%  { opacity: 1; transform: scale(1.18); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes sealImpact {
+  0%   { opacity: 0.5; transform: scale(0.4); }
+  100% { opacity: 0;   transform: scale(2.6); }
+}
+@keyframes envelopeRise {
+  0%   { transform: translateY(6px); }
+  100% { transform: translateY(-4px); }
+}
+@keyframes heartIn {
+  0%   { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.14); }
+}
+@keyframes pBurst {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.4); }
+  30%  { opacity: 1; }
+  100% { opacity: 0.85; transform: var(--end, translate(40px, -40px)) scale(1); }
+}
+@keyframes pFloat {
+  0%, 100% { transform: translate(0, 0); opacity: 0.6; }
+  50%      { transform: translate(var(--fx, 6px), var(--fy, -10px)); opacity: 1; }
+}
+@keyframes planeFly {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.95; }
+  50%      { transform: translate(10px, -10px) rotate(8deg); opacity: 1; }
+}
+@keyframes leafIn  { to { opacity: 1; } }
+@keyframes leafSway {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(2deg); }
+}
+@keyframes leafSwayR {
+  0%, 100% { transform: rotate(0deg); }
+  50%      { transform: rotate(-2deg); }
+}
+@keyframes checkPulse {
+  0%, 70%, 100% { box-shadow: 0 0 0 0 rgba(74,107,62,0); }
+  35%           { box-shadow: 0 0 0 8px rgba(74,107,62,0); }
+  36%           { box-shadow: 0 0 0 0 rgba(74,107,62,0.35); }
+}
+@keyframes underlineDraw {
+  to { transform: scaleX(1); }
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   * {

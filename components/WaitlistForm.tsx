@@ -66,6 +66,7 @@ export default function WaitlistForm({
   const [email, setEmail] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
+  const [alreadyRegistered, setAlreadyRegistered] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -90,28 +91,28 @@ export default function WaitlistForm({
       setIsSubmitting(false)
       return
     }
-    
-    if (!insertError) {
-      // Successful insertion: send welcome email
-      try {
-        await fetch('/api/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ email: trimmed })
-        })
-      } catch (err) {
-        console.error('Failed to send welcome email:', err)
-      }
-      
-      addEmail(trimmed)
+
+    if (isDuplicate) {
+      setAlreadyRegistered(true)
+      setIsSubmitting(false)
+      return
     }
 
+    try {
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: trimmed })
+      })
+    } catch (err) {
+      console.error('Failed to send welcome email:', err)
+    }
+
+    addEmail(trimmed)
     setSubmitted(true)
     setIsSubmitting(false)
     window.dispatchEvent(
-      new CustomEvent('prologue:waitlist-success', { detail: { alreadyRegistered: isDuplicate } })
+      new CustomEvent('prologue:waitlist-success', { detail: { alreadyRegistered: false } })
     )
   }
 
@@ -192,6 +193,22 @@ export default function WaitlistForm({
       >
         {error}
       </p>
+    )}
+    {alreadyRegistered && (
+      <div
+        role="status"
+        className={[
+          'mt-3 max-w-[460px] px-[18px] py-[14px]',
+          'bg-parchment-soft border border-rule rounded-2xl',
+          'font-body text-[14px] text-ink-soft',
+          centered ? 'mx-auto text-center' : '',
+        ].join(' ')}
+      >
+        <strong className="block font-display text-[18px] font-normal text-ink mb-[2px]">
+          Already on the list!
+        </strong>
+        You&apos;re already signed up. We&apos;ll be in touch the moment early access opens up.
+      </div>
     )}
     </>
   )

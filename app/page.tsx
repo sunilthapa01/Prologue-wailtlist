@@ -1,4 +1,5 @@
 import Nav from '@/components/Nav'
+import SuccessModal from '@/components/SuccessModal'
 import { WaitlistCount } from '@/components/WaitlistForm'
 import WaitlistForm from '@/components/WaitlistForm'
 import DerivativeDemo from '@/components/DerivativeDemo'
@@ -90,8 +91,8 @@ export default function Home() {
             to <em className="italic text-brand">understand</em>.
           </h2>
           <p className="font-display text-[clamp(20px,2.2vw,26px)] leading-snug text-ink-soft mx-auto mb-9 [text-wrap:pretty]">
-            Early access opens spring 2026. The first 5,000 learners get a year
-            of Prologue free.
+            Join the first learners exploring a more interactive way to understand
+            ideas. Early access is limited while we carefully shape the experience.
           </p>
           <WaitlistForm
             formId="final-form"
@@ -105,6 +106,7 @@ export default function Home() {
       </section>
 
       <Footer />
+      <SuccessModal />
     </>
   )
 }
