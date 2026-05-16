@@ -16,54 +16,61 @@ export default function Home() {
       <Nav />
 
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <header className="py-[72px_0_56px] pt-[72px] pb-14 relative">
-        <div className="max-w-[1080px] mx-auto px-7">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-[10px] font-body text-xs font-medium tracking-[1.8px] uppercase text-muted mb-7">
-            <span className="w-[7px] h-[7px] rounded-full bg-brand shadow-[0_0_0_4px_rgba(193,63,37,0.16)]" />
-            Interactive learning, for any concept
-          </div>
+      <header className="pt-[72px] pb-14 relative">
+        <div className="max-w-[1200px] mx-auto px-7">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
+            {/* Left column — Text content */}
+            <div className="lg:w-[55%] lg:flex-shrink-0">
+              {/* Eyebrow */}
+              <div className="inline-flex items-center gap-[10px] font-body text-xs font-medium tracking-[1.8px] uppercase text-muted mb-7">
+                <span className="w-[7px] h-[7px] rounded-full bg-brand shadow-[0_0_0_4px_rgba(193,63,37,0.16)]" />
+                Interactive learning, for any concept
+              </div>
 
-          {/* Headline */}
-          <h1 className="font-display font-normal text-[clamp(48px,8vw,96px)] leading-[0.96] tracking-[-1.5px] m-0 mb-[26px] text-ink [text-wrap:balance]">
-            Understand anything
-            <br />
-            by <em className="italic text-brand">touching</em> it.
-          </h1>
+              {/* Headline */}
+              <h1 className="font-display font-normal text-[clamp(42px,6vw,82px)] leading-[0.96] tracking-[-1.5px] m-0 mb-[26px] text-ink [text-wrap:balance]">
+                Understand anything
+                <br />
+                by <em className="italic text-brand">touching</em> it.
+              </h1>
 
-          {/* Lede */}
-          <p className="font-display text-[clamp(20px,2.2vw,26px)] leading-snug text-ink-soft max-w-[580px] mb-10 [text-wrap:pretty]">
-            Type any concept you don&apos;t quite grasp — at any grade, in any
-            subject. Prologue generates a living, touchable visual you can drag,
-            pull, and manipulate until the idea clicks.
-          </p>
+              {/* Lede */}
+              <p className="font-display text-[clamp(18px,2vw,24px)] leading-snug text-ink-soft max-w-[520px] mb-10 [text-wrap:pretty]">
+                Type any concept you don&apos;t quite grasp — at any grade, in any
+                subject. Prologue generates a living, touchable visual you can drag,
+                pull, and manipulate until the idea clicks.
+              </p>
 
-          {/* Hero waitlist form */}
-          <WaitlistForm
-            formId="hero-form"
-            inputId="hero-email"
-            successId="hero-success"
-            submitLabel="Join the waitlist"
-            successMessage="We'll email you the moment your spot opens up. No spam, promise."
-          />
+              {/* Hero waitlist form */}
+              <WaitlistForm
+                formId="hero-form"
+                inputId="hero-email"
+                successId="hero-success"
+                submitLabel="Join the waitlist"
+                successMessage="We'll email you the moment your spot opens up. No spam, promise."
+              />
 
-          {/* Meta line */}
-          <div className="flex items-center gap-[18px] flex-wrap mt-[18px] font-body text-[13px] text-muted">
-            <div className="inline-flex items-center">
-              <span className="w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-brand to-[#E88566] font-body text-[10px] font-semibold grid place-items-center text-white" />
-              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#2D5C8F] to-[#6B9BD1] font-body text-[10px] font-semibold grid place-items-center text-white" />
-              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#4A6B3E] to-[#8FB572] font-body text-[10px] font-semibold grid place-items-center text-white" />
-              <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#6B4A8B] to-[#A98BC8] font-body text-[10px] font-semibold grid place-items-center text-white" />
+              {/* Meta line */}
+              <div className="flex items-center gap-[18px] flex-wrap mt-[18px] font-body text-[13px] text-muted">
+                <div className="inline-flex items-center">
+                  <span className="w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-brand to-[#E88566] font-body text-[10px] font-semibold grid place-items-center text-white" />
+                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#2D5C8F] to-[#6B9BD1] font-body text-[10px] font-semibold grid place-items-center text-white" />
+                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#4A6B3E] to-[#8FB572] font-body text-[10px] font-semibold grid place-items-center text-white" />
+                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#6B4A8B] to-[#A98BC8] font-body text-[10px] font-semibold grid place-items-center text-white" />
+                </div>
+                <span>
+                  <WaitlistCount className="text-ink font-semibold" /> learners already waiting
+                </span>
+                <span className="opacity-60">·</span>
+                <span>Early access spring 2026</span>
+              </div>
             </div>
-            <span>
-              <WaitlistCount className="text-ink font-semibold" /> learners already waiting
-            </span>
-            <span className="opacity-60">·</span>
-            <span>Early access spring 2026</span>
-          </div>
 
-          {/* Live derivative demo */}
-          <DerivativeDemo />
+            {/* Right column — Live derivative demo */}
+            <div className="lg:w-[45%] mt-12 lg:mt-0">
+              <DerivativeDemo />
+            </div>
+          </div>
         </div>
       </header>
 

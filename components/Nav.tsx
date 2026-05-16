@@ -44,7 +44,7 @@ export default function Nav() {
             href="#join"
             className="px-4 py-2 rounded-full bg-ink text-[#F3EBDA] font-medium text-[13px] hover:bg-brand transition-colors duration-150"
           >
-            Join waitlist
+            Early Access
           </a>
         </div>
       </div>
