@@ -23,7 +23,7 @@ export default function Nav() {
         scrolled ? 'border-rule' : 'border-transparent',
       ].join(' ')}
     >
-      <div className="max-w-[1080px] mx-auto px-7 flex items-center justify-between py-[14px]">
+      <div className="max-w-[1200px] mx-auto px-7 flex items-center justify-between py-[14px]">
         <a href="#" className="hover:opacity-80 transition-opacity">
           <Logo size={24} />
         </a>
