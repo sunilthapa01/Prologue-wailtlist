@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Logo from './Logo'
 
 export default function Footer() {
@@ -10,20 +11,20 @@ export default function Footer() {
             <div className="opacity-60">© 2026 Prologue Learning, Inc.</div>
           </div>
         <div className="flex gap-[22px]">
-          <a href="#" className="text-muted hover:text-brand transition-colors duration-150">
+          <Link href="/privacy" className="text-muted hover:text-brand transition-colors duration-150">
             Privacy
-          </a>
-          <a href="#" className="text-muted hover:text-brand transition-colors duration-150">
+          </Link>
+          <Link href="/terms" className="text-muted hover:text-brand transition-colors duration-150">
             Terms
-          </a>
+          </Link>
           <a href="#" className="text-muted hover:text-brand transition-colors duration-150">
             Twitter
           </a>
           <a
-            href="mailto:hello@prologue.app"
+            href="mailto:prologue.help@gmail.com"
             className="text-muted hover:text-brand transition-colors duration-150"
           >
-            hello@prologue.app
+            prologue.help@gmail.com
           </a>
         </div>
         </div>

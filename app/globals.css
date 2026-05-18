@@ -120,6 +120,35 @@ body {
   to { transform: scaleX(1); }
 }
 
+/* ── Legal page prose ─────────────────────────────────────── */
+.prose-prologue p,
+.prose-prologue li {
+  font-family: var(--font-geist), system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: #3A332C;
+}
+
+.prose-prologue p.lead {
+  font-size: 17px;
+  color: #1B1714;
+}
+
+.prose-prologue ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+  space-y: 0.5rem;
+}
+
+.prose-prologue ul li {
+  margin-top: 0.35rem;
+}
+
+.prose-prologue strong {
+  color: #1B1714;
+  font-weight: 600;
+}
+
 /* ── Reduced motion ───────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   * {
