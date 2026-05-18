@@ -8,7 +8,8 @@
       "Bash(npm run *)",
       "Bash(curl -s http://localhost:3001)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")"
+      "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
+      "Bash(git fetch *)"
     ],
     "additionalDirectories": [
       "/home/sunil/Desktop/PrologueWaitlist"
