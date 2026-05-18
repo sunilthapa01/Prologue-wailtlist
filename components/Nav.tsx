@@ -42,6 +42,7 @@ export default function Nav() {
           </a>
           <a
             href="#join"
+            onClick={() => window.dispatchEvent(new CustomEvent('prologue:show-waitlist'))}
             className="px-4 py-2 rounded-full bg-ink text-[#F3EBDA] font-medium text-[13px] hover:bg-brand transition-colors duration-150"
           >
             Early Access

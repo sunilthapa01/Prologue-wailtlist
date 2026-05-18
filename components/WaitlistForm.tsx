@@ -68,6 +68,22 @@ export default function WaitlistForm({
   const [error, setError] = useState('')
   const [alreadyRegistered, setAlreadyRegistered] = useState(false)
 
+  useEffect(() => {
+    const handleSuccess = () => setSubmitted(true)
+    const handleReset = () => {
+      setSubmitted(false)
+      setEmail('')
+      setError('')
+      setAlreadyRegistered(false)
+    }
+    window.addEventListener('prologue:waitlist-success', handleSuccess)
+    window.addEventListener('prologue:show-waitlist', handleReset)
+    return () => {
+      window.removeEventListener('prologue:waitlist-success', handleSuccess)
+      window.removeEventListener('prologue:show-waitlist', handleReset)
+    }
+  }, [])
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const trimmed = email.trim()
