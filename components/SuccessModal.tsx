@@ -113,34 +113,6 @@ function ModalInner({ alreadyRegistered }: { alreadyRegistered: boolean }) {
         <RightColumn />
       </div>
 
-      {/* Footer strip */}
-      <div
-        style={{
-          borderTop: '1px solid #D9D2BF',
-          padding: '16px 40px',
-          background: 'rgba(0,0,0,0.01)',
-        }}
-      >
-        <div className="flex items-center gap-4 font-body text-[13px] text-muted flex-wrap">
-          <span className="inline-flex">
-            {(['#C13F25', '#E88566', '#2D5C8F', '#6B4A8B', '#4A6B3E'] as const).map((c, i) => (
-              <span
-                key={i}
-                style={{
-                  width: 14, height: 14, borderRadius: '50%', background: c,
-                  border: '2px solid #F5F1E6', marginLeft: i === 0 ? 0 : -5,
-                  display: 'inline-block',
-                }}
-              />
-            ))}
-          </span>
-          <span>
-            <strong className="font-semibold text-ink">2,847</strong> learners already waiting
-          </span>
-          <span className="text-muted-soft">·</span>
-          <span>Early access spring 2026</span>
-        </div>
-      </div>
     </>
   )
 }

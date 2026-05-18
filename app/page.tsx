@@ -1,6 +1,5 @@
 import Nav from '@/components/Nav'
 import SuccessModal from '@/components/SuccessModal'
-import { WaitlistCount } from '@/components/WaitlistForm'
 import WaitlistForm from '@/components/WaitlistForm'
 import DerivativeDemo from '@/components/DerivativeDemo'
 import PhoneShowcase from '@/components/PhoneShowcase'
@@ -50,20 +49,6 @@ export default function Home() {
                 successMessage="We'll email you the moment your spot opens up. No spam, promise."
               />
 
-              {/* Meta line */}
-              <div className="flex items-center gap-[18px] flex-wrap mt-[18px] font-body text-[13px] text-muted">
-                <div className="inline-flex items-center">
-                  <span className="w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-brand to-[#E88566] font-body text-[10px] font-semibold grid place-items-center text-white" />
-                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#2D5C8F] to-[#6B9BD1] font-body text-[10px] font-semibold grid place-items-center text-white" />
-                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#4A6B3E] to-[#8FB572] font-body text-[10px] font-semibold grid place-items-center text-white" />
-                  <span className="-ml-2 w-[22px] h-[22px] rounded-full border-2 border-parchment bg-gradient-to-br from-[#6B4A8B] to-[#A98BC8] font-body text-[10px] font-semibold grid place-items-center text-white" />
-                </div>
-                <span>
-                  <WaitlistCount className="text-ink font-semibold" /> learners already waiting
-                </span>
-                <span className="opacity-60">·</span>
-                <span>Early access spring 2026</span>
-              </div>
             </div>
 
             {/* Right column — Live derivative demo */}

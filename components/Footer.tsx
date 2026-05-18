@@ -17,8 +17,8 @@ export default function Footer() {
           <Link href="/terms" className="text-muted hover:text-brand transition-colors duration-150">
             Terms
           </Link>
-          <a href="#" className="text-muted hover:text-brand transition-colors duration-150">
-            Twitter
+          <a href="https://instagram.com/prologue.app" target="_blank" rel="noopener noreferrer" className="text-muted hover:text-brand transition-colors duration-150">
+            Instagram
           </a>
           <a
             href="mailto:prologue.help@gmail.com"
