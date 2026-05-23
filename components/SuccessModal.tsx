@@ -50,13 +50,11 @@ export default function SuccessModal() {
     <div
       aria-hidden={!isOpen}
       onClick={(e) => { if (e.target === e.currentTarget) close() }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-5 md:p-6"
       style={{
-        position: 'fixed', inset: 0, zIndex: 100,
         background: 'rgba(28,24,21,0.42)',
         backdropFilter: 'blur(10px) saturate(140%)',
         WebkitBackdropFilter: 'blur(10px) saturate(140%)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '24px',
         opacity: isOpen ? 1 : 0,
         pointerEvents: isOpen ? 'auto' : 'none',
         transition: 'opacity 0.45s ease',
@@ -66,14 +64,9 @@ export default function SuccessModal() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
+        className="relative w-full max-w-[1120px] max-h-[94vh] sm:max-h-[92vh] overflow-hidden rounded-[20px] sm:rounded-[24px] md:rounded-[28px]"
         style={{
-          position: 'relative',
           background: '#F5F1E6',
-          borderRadius: '28px',
-          width: '100%',
-          maxWidth: '1120px',
-          maxHeight: '92vh',
-          overflow: 'hidden',
           boxShadow:
             '0 60px 120px -30px rgba(28,24,21,0.45), 0 12px 24px -8px rgba(28,24,21,0.15), inset 0 0 0 1px rgba(255,255,255,0.6)',
           opacity: isOpen ? 1 : 0,
@@ -87,7 +80,7 @@ export default function SuccessModal() {
         <button
           onClick={close}
           aria-label="Close"
-          className="absolute top-[18px] right-[18px] z-20 w-[38px] h-[38px] rounded-full border-0 bg-[rgba(28,24,21,0.06)] text-ink-soft grid place-items-center cursor-pointer transition-[background,transform,color] duration-200 hover:bg-ink hover:text-[#F3EBDA] hover:rotate-90 hover:scale-105"
+          className="absolute top-3 right-3 sm:top-[14px] sm:right-[14px] md:top-[18px] md:right-[18px] z-20 w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full border-0 bg-[rgba(28,24,21,0.06)] text-ink-soft grid place-items-center cursor-pointer transition-[background,transform,color] duration-200 hover:bg-ink hover:text-[#F3EBDA] hover:rotate-90 hover:scale-105"
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
             <path d="M2 2l10 10M12 2L2 12" />
@@ -106,8 +99,7 @@ function ModalInner({ alreadyRegistered }: { alreadyRegistered: boolean }) {
     <>
       {/* Scrollable body */}
       <div
-        className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] items-center gap-2 md:gap-0 p-8 md:p-14 overflow-y-auto"
-        style={{ maxHeight: 'calc(92vh - 57px)' }}
+        className="grid grid-cols-1 md:grid-cols-[1.05fr_1fr] items-center gap-4 md:gap-0 px-5 py-7 sm:p-8 md:p-14 overflow-y-auto max-h-[94vh] sm:max-h-[92vh]"
       >
         <LeftColumn alreadyRegistered={alreadyRegistered} />
         <RightColumn />
@@ -122,7 +114,7 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
     <div className="md:pr-9 order-2 md:order-1">
       {/* Badge */}
       <div
-        className="inline-flex items-center gap-[10px] font-body text-[15px] font-medium mb-6"
+        className="inline-flex items-center gap-[10px] font-body text-[14px] sm:text-[15px] font-medium mb-4 sm:mb-6"
         style={{
           color: '#3D5A33',
           opacity: 0, transform: 'translateY(8px)',
@@ -130,7 +122,7 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
         }}
       >
         <span
-          className="w-6 h-6 rounded-full grid place-items-center"
+          className="w-6 h-6 rounded-full grid place-items-center flex-shrink-0"
           style={{
             background: '#E5EDD8', color: '#3D5A33',
             ...anim('checkPulse', '2.6s', '1.4s', 'ease-out', 'infinite'),
@@ -146,9 +138,9 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
       {/* Headline */}
       <h1
         id="modal-title"
-        className="font-display font-normal leading-[1.02] tracking-[-1.2px] mb-7 text-ink [text-wrap:balance]"
+        className="font-display font-normal leading-[1.02] tracking-[-0.8px] sm:tracking-[-1.2px] mb-5 sm:mb-7 text-ink [text-wrap:balance]"
         style={{
-          fontSize: 'clamp(36px,4.4vw,64px)',
+          fontSize: 'clamp(28px,7vw,64px)',
           opacity: 0, transform: 'translateY(14px)',
           ...anim('fadeUp', '0.65s', '0.45s', 'cubic-bezier(.2,.8,.3,1)'),
         }}
@@ -162,7 +154,7 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
 
       {/* Body copy */}
       <p
-        className="font-body text-[16px] leading-[1.55] text-ink-soft mb-[14px] max-w-[460px]"
+        className="font-body text-[15px] sm:text-[16px] leading-[1.55] text-ink-soft mb-3 sm:mb-[14px] max-w-[460px]"
         style={{
           opacity: 0, transform: 'translateY(10px)',
           ...anim('fadeUp', '0.6s', '0.55s', 'ease-out'),
@@ -175,7 +167,7 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
         )}
       </p>
       <p
-        className="font-body text-[16px] leading-[1.55] text-ink-soft mb-8 max-w-[460px]"
+        className="font-body text-[15px] sm:text-[16px] leading-[1.55] text-ink-soft mb-6 sm:mb-8 max-w-[460px]"
         style={{
           opacity: 0, transform: 'translateY(10px)',
           ...anim('fadeUp', '0.6s', '0.65s', 'ease-out'),
@@ -188,25 +180,24 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
 
       {/* "What happens next?" card */}
       <div
-        className="rounded-[18px] max-w-[560px]"
+        className="rounded-[16px] sm:rounded-[18px] max-w-[560px] p-5 sm:p-6 md:p-7 border border-rule"
         style={{
-          background: '#E5EDD8',
-          padding: '24px 28px 22px',
+          background: '#EAE3D1',
           boxShadow: '0 1px 0 rgba(0,0,0,0.02)',
           opacity: 0, transform: 'translateY(14px)',
           ...anim('fadeUp', '0.65s', '0.8s', 'cubic-bezier(.2,.8,.3,1)'),
         }}
       >
         <div
-          className="inline-flex items-center gap-2 font-body text-[15px] font-semibold mb-5"
-          style={{ color: '#3D5A33', letterSpacing: '-0.1px' }}
+          className="inline-flex items-center gap-2 font-body text-[14px] sm:text-[15px] font-semibold mb-4 sm:mb-5"
+          style={{ color: '#3A332C', letterSpacing: '-0.1px' }}
         >
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" />
           </svg>
           What happens next?
         </div>
-        <div className="grid grid-cols-3 gap-[14px]">
+        <div className="grid grid-cols-3 gap-2 sm:gap-[14px]">
           <NextStep
             icon={
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -242,16 +233,16 @@ function LeftColumn({ alreadyRegistered }: { alreadyRegistered: boolean }) {
 
 function NextStep({ icon, label }: { icon: React.ReactNode; label: string }) {
   return (
-    <div className="flex flex-col items-center text-center gap-3 p-1 rounded-xl transition-transform duration-[250ms] hover:-translate-y-[3px] group">
+    <div className="flex flex-col items-center text-center gap-2 sm:gap-3 p-1 rounded-xl transition-transform duration-[250ms] hover:-translate-y-[3px] group">
       <div
-        className="w-12 h-12 rounded-full grid place-items-center transition-[background,transform] duration-200 group-hover:scale-[1.08]"
-        style={{ background: '#D5DEC0', color: '#3D5A33' }}
-        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = '#C9D6B5' }}
-        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = '#D5DEC0' }}
+        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full grid place-items-center transition-[background,transform] duration-200 group-hover:scale-[1.08] flex-shrink-0 [&_svg]:w-[18px] [&_svg]:h-[18px] sm:[&_svg]:w-[22px] sm:[&_svg]:h-[22px]"
+        style={{ background: '#D9D2BF', color: '#3A332C' }}
+        onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = '#CEC7B5' }}
+        onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = '#D9D2BF' }}
       >
         {icon}
       </div>
-      <div className="font-body text-[13px] leading-[1.42] text-ink-soft max-w-[130px]">{label}</div>
+      <div className="font-body text-[11px] sm:text-[13px] leading-[1.35] sm:leading-[1.42] text-ink-soft max-w-[130px]">{label}</div>
     </div>
   )
 }
@@ -261,10 +252,9 @@ function RightColumn() {
     <div className="flex flex-col items-center justify-center relative order-1 md:order-2">
       {/* Envelope illustration */}
       <div
-        className="w-full max-w-[480px]"
+        className="w-full max-w-[260px] sm:max-w-[360px] md:max-w-[480px] relative"
         style={{
           aspectRatio: '1 / 0.94',
-          position: 'relative',
           opacity: 0, transform: 'translateY(20px)',
           ...anim('stageRise', '0.8s', '0.25s', 'cubic-bezier(.2,.8,.3,1)'),
         }}
@@ -274,20 +264,20 @@ function RightColumn() {
 
       {/* Closing script text */}
       <div
-        className="mt-[22px] text-center"
+        className="mt-3 sm:mt-4 md:mt-[22px] text-center px-2"
         style={{
           opacity: 0, transform: 'translateY(10px)',
           ...anim('fadeUp', '0.7s', '2.4s', 'ease-out'),
         }}
       >
         <div
-          className="text-[26px] text-ink-soft leading-[1.2]"
+          className="text-[19px] sm:text-[22px] md:text-[26px] text-ink-soft leading-[1.2]"
           style={{ fontFamily: 'var(--font-caveat), cursive' }}
         >
           Until then, keep being curious.
         </div>
         <div
-          className="relative text-[30px] text-brand leading-[1.2] inline-block mt-[2px]"
+          className="relative text-[22px] sm:text-[26px] md:text-[30px] text-brand leading-[1.2] inline-block mt-[2px]"
           style={{ fontFamily: 'var(--font-caveat), cursive' }}
         >
           The best ideas are just a touch away.

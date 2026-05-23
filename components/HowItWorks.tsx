@@ -2,21 +2,21 @@
 
 export default function HowItWorks() {
   return (
-    <section className="py-24" id="how">
-      <div className="max-w-[1080px] mx-auto px-7">
+    <section className="py-16 sm:py-24" id="how">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-7">
         <div className="font-code text-xs tracking-[1.6px] text-brand mb-[14px]">
           № 02 — How it works
         </div>
-        <h2 className="font-display font-normal text-[clamp(38px,5.4vw,64px)] leading-none tracking-[-1px] mb-[18px] [text-wrap:balance]">
+        <h2 className="font-display font-normal text-[clamp(32px,8vw,64px)] leading-[1.02] tracking-[-1px] mb-4 sm:mb-[18px] [text-wrap:balance]">
           Type a concept.
           <br />
           Touch the answer.
         </h2>
-        <p className="font-display text-[clamp(18px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mb-14">
+        <p className="font-display text-[clamp(16px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mb-10 sm:mb-14">
           Three steps, every time. Any subject, any grade level.
         </p>
 
-        <div className="grid grid-cols-3 gap-7 max-[760px]:grid-cols-1 max-[760px]:gap-[18px]">
+        <div className="grid grid-cols-3 gap-5 sm:gap-7 max-[760px]:grid-cols-1 max-[760px]:gap-4">
 
           {/* ── Pillar 1: Ask ──────────────────────────────────── */}
           <div className="bg-parchment-soft border border-rule rounded-[20px] p-7 pb-[26px] flex flex-col gap-4 min-h-[280px] hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-28px_rgba(28,24,21,0.3)] transition-all duration-200">

@@ -5,15 +5,15 @@ import SupplyDemandCard from './SupplyDemandCard'
 
 export default function Gallery() {
   return (
-    <section className="py-24" id="examples">
-      <div className="max-w-[1080px] mx-auto px-7">
+    <section className="py-16 sm:py-24" id="examples">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-7">
         <div className="font-code text-xs tracking-[1.6px] text-brand mb-[14px]">
           № 03 — A few examples
         </div>
-        <h2 className="font-display font-normal text-[clamp(38px,5.4vw,64px)] leading-none tracking-[-1px] mb-[18px] [text-wrap:balance]">
+        <h2 className="font-display font-normal text-[clamp(32px,8vw,64px)] leading-[1.02] tracking-[-1px] mb-4 sm:mb-[18px] [text-wrap:balance]">
           Anything is <em className="italic text-brand">touchable.</em>
         </h2>
-        <p className="font-display text-[clamp(18px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mb-14">
+        <p className="font-display text-[clamp(16px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mb-10 sm:mb-14">
           A handful of concepts students have already brought us. Each one becomes a tiny working world.
         </p>
 

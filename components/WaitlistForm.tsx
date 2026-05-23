@@ -158,9 +158,9 @@ export default function WaitlistForm({
       autoComplete="off"
       onSubmit={handleSubmit}
       className={[
-        'flex items-center gap-2 max-w-[460px]',
-        'px-5 py-[6px] pr-[6px]',
-        'bg-white rounded-full border border-rule',
+        'flex flex-col sm:flex-row sm:items-center gap-2 max-w-[460px]',
+        'p-2 sm:px-5 sm:py-[6px] sm:pr-[6px]',
+        'bg-white rounded-[22px] sm:rounded-full border border-rule',
         'shadow-[0_1px_0_rgba(28,24,21,0.04),0_18px_36px_-22px_rgba(28,24,21,0.22)]',
         'focus-within:shadow-[0_1px_0_rgba(28,24,21,0.04),0_20px_40px_-20px_rgba(193,63,37,0.28),0_0_0_4px_rgba(193,63,37,0.12)]',
         'transition-shadow duration-200',
@@ -176,12 +176,12 @@ export default function WaitlistForm({
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         disabled={isSubmitting}
-        className="flex-1 min-w-0 border-0 outline-none bg-transparent font-body text-[16px] text-ink py-[14px] placeholder:text-muted-soft"
+        className="flex-1 min-w-0 w-full border-0 outline-none bg-transparent font-body text-[16px] text-ink py-3 px-3 sm:px-0 sm:py-[14px] placeholder:text-muted-soft"
       />
       <button
         type="submit"
         disabled={isSubmitting}
-        className="border-0 bg-ink text-[#F3EBDA] font-body text-[15px] font-medium px-[22px] py-3 rounded-full cursor-pointer inline-flex items-center gap-2 hover:bg-brand active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-70 transition-all duration-150 group"
+        className="border-0 bg-ink text-[#F3EBDA] font-body text-[15px] font-medium px-5 sm:px-[22px] py-3 rounded-full cursor-pointer inline-flex items-center justify-center gap-2 hover:bg-brand active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-70 transition-all duration-150 group w-full sm:w-auto whitespace-nowrap"
       >
         {isSubmitting ? 'Joining...' : submitLabel}
         <svg

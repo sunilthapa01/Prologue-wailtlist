@@ -12,13 +12,13 @@ export default function PrivacyPage() {
     <>
       <Nav />
 
-      <main className="max-w-[1200px] mx-auto px-7 pt-20 pb-24">
+      <main className="max-w-[1200px] mx-auto px-5 sm:px-7 pt-12 sm:pt-20 pb-16 sm:pb-24">
         {/* Header */}
-        <div className="mb-14">
-          <p className="font-body text-xs font-medium tracking-[1.8px] uppercase text-muted mb-5">
+        <div className="mb-10 sm:mb-14">
+          <p className="font-body text-xs font-medium tracking-[1.8px] uppercase text-muted mb-4 sm:mb-5">
             Legal
           </p>
-          <h1 className="font-display font-normal text-[clamp(40px,5vw,68px)] leading-[0.96] tracking-[-1.2px] text-ink mb-5">
+          <h1 className="font-display font-normal text-[clamp(32px,8vw,68px)] leading-[1.02] sm:leading-[0.96] tracking-[-0.8px] sm:tracking-[-1.2px] text-ink mb-4 sm:mb-5">
             Privacy Policy
           </h1>
           <p className="font-body text-[14px] text-muted">

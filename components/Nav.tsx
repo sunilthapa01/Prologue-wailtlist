@@ -28,11 +28,11 @@ export default function Nav() {
         scrolled ? 'border-rule' : 'border-transparent',
       ].join(' ')}
     >
-      <div className="max-w-[1200px] mx-auto px-7 flex items-center justify-between py-[14px]">
+      <div className="max-w-[1200px] mx-auto px-5 sm:px-7 flex items-center justify-between py-[14px]">
         <Link href="/" className="hover:opacity-80 transition-opacity">
           <Logo size={24} />
         </Link>
-        <div className="flex items-center gap-6 font-body text-[14px] text-ink-soft">
+        <div className="flex items-center gap-4 sm:gap-6 font-body text-[14px] text-ink-soft">
           {!isLegalPage && (
             <>
               <a
@@ -50,13 +50,13 @@ export default function Nav() {
             </>
           )}
           <a
-            href={isLegalPage ? '/#join' : '#join'}
+            href={isLegalPage ? '/waitlistpage/#join' : '#join'}
             onClick={() => {
               if (!isLegalPage) {
                 window.dispatchEvent(new CustomEvent('prologue:show-waitlist'))
               }
             }}
-            className="px-4 py-2 rounded-full bg-ink text-[#F3EBDA] font-medium text-[13px] hover:bg-brand transition-colors duration-150"
+            className="px-3.5 sm:px-4 py-2 rounded-full bg-ink text-[#F3EBDA] font-medium text-[12px] sm:text-[13px] hover:bg-brand transition-colors duration-150 whitespace-nowrap"
           >
             Early Access
           </a>

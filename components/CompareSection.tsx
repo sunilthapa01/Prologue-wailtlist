@@ -2,10 +2,10 @@
 
 export default function CompareSection() {
   return (
-    <section className="py-24 pt-16">
-      <div className="max-w-[1080px] mx-auto px-7">
+    <section className="py-16 sm:py-24 pt-12 sm:pt-16">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-7">
         <div
-          className="bg-parchment-card text-[#EFE7D6] rounded-3xl px-11 py-14 relative overflow-hidden max-[760px]:px-6 max-[760px]:py-9"
+          className="bg-parchment-card text-[#EFE7D6] rounded-3xl px-11 py-14 relative overflow-hidden max-[760px]:px-6 max-[760px]:py-9 max-[760px]:rounded-2xl"
         >
           <div className="grid grid-cols-3 max-[760px]:grid-cols-1 max-[760px]:gap-6 relative z-10">
 

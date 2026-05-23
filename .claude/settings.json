@@ -9,7 +9,12 @@
       "Bash(curl -s http://localhost:3001)",
       "Bash(pkill -f \"next dev\")",
       "Bash(grep -E \"\\\\.\\(tsx|ts\\)$\")",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(npx next *)",
+      "Bash(curl -s -o /dev/null -w \"/ %{http_code}\\\\n\" http://localhost:3001/)",
+      "Bash(curl -s -o /dev/null -w \"/privacy %{http_code}\\\\n\" http://localhost:3001/privacy)",
+      "Bash(curl -s -o /dev/null -w \"/terms %{http_code}\\\\n\" http://localhost:3001/terms)"
     ],
     "additionalDirectories": [
       "/home/sunil/Desktop/PrologueWaitlist"

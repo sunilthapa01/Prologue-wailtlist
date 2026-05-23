@@ -4,23 +4,23 @@ import Logo from './Logo'
 
 export default function FounderNote() {
   return (
-    <section className="pb-24">
-      <div className="max-w-[1080px] mx-auto px-7">
-        <div className="grid grid-cols-[140px_1fr] gap-12 items-start p-14 bg-parchment-soft border border-rule rounded-3xl max-[768px]:grid-cols-1 max-[768px]:gap-8 max-[768px]:p-8 max-[768px]:px-6">
+    <section className="pb-16 sm:pb-24">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-7">
+        <div className="grid grid-cols-[140px_1fr] gap-12 items-start p-14 bg-parchment-soft border border-rule rounded-3xl max-[768px]:grid-cols-1 max-[768px]:gap-6 max-[768px]:p-6 max-[768px]:rounded-2xl">
 
           {/* Brand Logo Avatar */}
           <div
-            className="w-[120px] h-[120px] rounded-[32px] grid place-items-center justify-self-center"
+            className="w-[96px] h-[96px] sm:w-[120px] sm:h-[120px] rounded-[26px] sm:rounded-[32px] grid place-items-center justify-self-center"
             style={{
               background: '#1C1917',
               boxShadow: '0 24px 48px -16px rgba(28, 25, 23, 0.45)',
             }}
           >
-            <Logo 
-              iconOnly 
-              size={56} 
-              brandColor="text-brand" 
-              inkColor="text-[#FAF6F0]" 
+            <Logo
+              iconOnly
+              size={56}
+              brandColor="text-brand"
+              inkColor="text-[#FAF6F0]"
             />
           </div>
 
@@ -50,8 +50,8 @@ export default function FounderNote() {
             <hr className="border-t border-rule mb-8 w-full max-w-[680px]" />
 
             {/* Launch CTA */}
-            <div className="inline-flex items-center gap-[18px] bg-white/40 p-2 pr-8 rounded-full border border-white/50">
-              <div className="w-[52px] h-[52px] rounded-full bg-white grid place-items-center shadow-sm border border-[#E5E0D8] flex-shrink-0">
+            <div className="inline-flex items-center gap-3 sm:gap-[18px] bg-white/40 p-2 pr-5 sm:pr-8 rounded-[26px] sm:rounded-full border border-white/50 max-w-full">
+              <div className="w-[44px] h-[44px] sm:w-[52px] sm:h-[52px] rounded-full bg-white grid place-items-center shadow-sm border border-[#E5E0D8] flex-shrink-0">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-ink">
                   <rect width="18" height="18" x="3" y="4" rx="2" ry="2"/>
                   <line x1="16" x2="16" y1="2" y2="6"/>
@@ -60,7 +60,7 @@ export default function FounderNote() {
                   <path d="m9 16 2 2 4-4"/>
                 </svg>
               </div>
-              <p className="font-display text-[19px] text-ink-soft tracking-[-0.2px] m-0">
+              <p className="font-display text-[16px] sm:text-[19px] leading-[1.3] text-ink-soft tracking-[-0.2px] m-0">
                 We&rsquo;re launching soon &mdash;{' '}
                 <a 
                   href="#hero-email" 

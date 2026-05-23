@@ -13,29 +13,29 @@ const StatusIcons = () => (
 
 export default function PhoneShowcase() {
   return (
-    <section className="py-14 pb-8" style={{ padding: '56px 0 32px' }}>
-      <div className="max-w-[1080px] mx-auto px-7 text-center">
+    <section className="pt-10 sm:pt-14 pb-8">
+      <div className="max-w-[1080px] mx-auto px-5 sm:px-7 text-center">
         <div className="font-code text-xs tracking-[1.6px] text-brand mb-[14px]">
           № 01 — In your pocket
         </div>
         <h2
-          className="font-display font-normal text-[clamp(38px,5.4vw,64px)] leading-none tracking-[-1px] mb-[18px] [text-wrap:balance] text-center"
+          className="font-display font-normal text-[clamp(32px,8vw,64px)] leading-[1.02] tracking-[-1px] mb-4 sm:mb-[18px] [text-wrap:balance] text-center"
         >
           A working <em className="italic text-brand">world</em>,
           <br />
           in every screen.
         </h2>
-        <p className="font-display text-[clamp(18px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mx-auto mb-0">
+        <p className="font-display text-[clamp(16px,2vw,22px)] leading-[1.45] text-ink-soft max-w-[560px] mx-auto mb-0">
           Tap, drag, pinch. The same interactive worlds run smoothly on phone,
           tablet and desktop.
         </p>
 
         {/* Phones stage */}
-        <div className="phones-stage relative flex justify-center items-end gap-3 py-12 pb-6 min-h-[540px] max-[900px]:gap-0 max-[900px]:py-8 max-[640px]:min-h-[460px]">
+        <div className="phones-stage relative flex justify-center items-end gap-3 py-12 pb-6 min-h-[540px] max-[900px]:gap-0 max-[900px]:py-8 max-[640px]:min-h-[420px] max-[400px]:min-h-[360px]">
 
           {/* ── Phone 1 · LEFT — Derivative (dark) ────────────── */}
           <div
-            className="phone phone--left relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] [cubic-bezier(.2,.7,.3,1)] max-[900px]:w-[200px] max-[640px]:w-[170px]"
+            className="phone phone--left relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] [cubic-bezier(.2,.7,.3,1)] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
@@ -84,7 +84,7 @@ export default function PhoneShowcase() {
 
           {/* ── Phone 2 · CENTER — Pendulum (light) ───────────── */}
           <div
-            className="phone phone--center relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 z-[2] transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[170px]"
+            className="phone phone--center relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 z-[2] transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
@@ -152,7 +152,7 @@ export default function PhoneShowcase() {
 
           {/* ── Phone 3 · RIGHT — Cells (dark) ────────────────── */}
           <div
-            className="phone phone--right relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[170px]"
+            className="phone phone--right relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
