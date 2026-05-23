@@ -184,25 +184,25 @@ export default function DerivativeDemo() {
       />
 
       {/* Header */}
-      <div className="relative z-10 flex items-end justify-between gap-5 mb-6 flex-wrap">
+      <div className="relative z-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-5 mb-5 sm:mb-6">
         <div
-          className="font-display italic text-[clamp(18px,2.4vw,26px)] leading-snug text-[#EFE7D6] max-w-[400px] tracking-[-0.2px]"
+          className="font-display italic text-[clamp(16px,2.4vw,26px)] leading-snug text-[#EFE7D6] max-w-[400px] tracking-[-0.2px]"
         >
-          <span className="not-italic font-code text-[12px] tracking-[1.6px] uppercase text-[#8A8071] block mb-[10px]">
+          <span className="not-italic font-code text-[11px] tracking-[1.6px] uppercase text-[#8A8071] block mb-[8px]">
             You typed
           </span>
           &ldquo;I don&rsquo;t understand what a derivative{' '}
           <em className="italic text-brand">means</em>.&rdquo;
         </div>
 
-        <div className="flex gap-7 items-end">
+        <div className="flex gap-5 sm:gap-7 items-end">
           <div className="text-right">
             <div className="font-code text-[10px] tracking-[1.4px] uppercase text-[#7A6F5E] mb-1">
               x
             </div>
             <div
               ref={rXRef}
-              className="font-display text-[clamp(26px,3.5vw,36px)] leading-none text-[#EFE7D6] tracking-[-0.5px] tabular-nums"
+              className="font-display text-[clamp(22px,3.5vw,36px)] leading-none text-[#EFE7D6] tracking-[-0.5px] tabular-nums"
             >
               0.00
             </div>
@@ -213,7 +213,7 @@ export default function DerivativeDemo() {
             </div>
             <div
               ref={rSlopeRef}
-              className="font-display text-[clamp(26px,3.5vw,36px)] leading-none text-brand tracking-[-0.5px] tabular-nums"
+              className="font-display text-[clamp(22px,3.5vw,36px)] leading-none text-brand tracking-[-0.5px] tabular-nums"
             >
               0.00
             </div>

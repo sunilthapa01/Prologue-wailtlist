@@ -15,7 +15,7 @@ export default function Home() {
       <Nav />
 
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <header className="pt-12 sm:pt-[72px] pb-14 relative">
+      <header className="pt-10 sm:pt-[72px] pb-10 sm:pb-14 relative overflow-x-hidden">
         <div className="max-w-[1200px] mx-auto px-5 sm:px-7">
           <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
             {/* Left column — Text content */}
@@ -66,7 +66,7 @@ export default function Home() {
       <CompareSection />
 
       {/* ── How It Works ──────────────────────────────────────── */}
-      <HowItWorks />
+    <HowItWorks />
 
       {/* ── Examples Gallery ──────────────────────────────────── */}
       <Gallery />
@@ -75,7 +75,7 @@ export default function Home() {
       <FounderNote />
 
       {/* ── Final CTA ─────────────────────────────────────────── */}
-      <section className="text-center pt-20 sm:pt-[120px] pb-20 sm:pb-[100px]" id="join">
+      <section className="text-center pt-14 sm:pt-[120px] pb-16 sm:pb-[100px]" id="join">
         <div className="max-w-[720px] mx-auto px-5 sm:px-7">
           <h2 className="font-display font-normal text-[clamp(40px,9vw,88px)] leading-[0.95] tracking-[-1px] sm:tracking-[-1.5px] mb-6 sm:mb-[28px] [text-wrap:balance]">
             Be one of the first

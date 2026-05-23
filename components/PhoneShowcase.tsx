@@ -31,11 +31,11 @@ export default function PhoneShowcase() {
         </p>
 
         {/* Phones stage */}
-        <div className="phones-stage relative flex justify-center items-end gap-3 py-12 pb-6 min-h-[540px] max-[900px]:gap-0 max-[900px]:py-8 max-[640px]:min-h-[420px] max-[400px]:min-h-[360px]">
+        <div className="phones-stage relative flex justify-center items-end gap-3 py-12 pb-6 min-h-[540px] overflow-hidden max-[900px]:gap-0 max-[900px]:py-8 max-md:min-h-0 max-md:py-8">
 
           {/* ── Phone 1 · LEFT — Derivative (dark) ────────────── */}
           <div
-            className="phone phone--left relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] [cubic-bezier(.2,.7,.3,1)] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
+            className="phone phone--left hidden md:block relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] [cubic-bezier(.2,.7,.3,1)] max-[900px]:w-[200px]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
@@ -84,7 +84,7 @@ export default function PhoneShowcase() {
 
           {/* ── Phone 2 · CENTER — Pendulum (light) ───────────── */}
           <div
-            className="phone phone--center relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 z-[2] transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
+            className="phone phone--center relative w-[62vw] md:w-[200px] min-[900px]:w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 z-[2] transition-transform duration-[350ms]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
@@ -152,7 +152,7 @@ export default function PhoneShowcase() {
 
           {/* ── Phone 3 · RIGHT — Cells (dark) ────────────────── */}
           <div
-            className="phone phone--right relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] max-[900px]:w-[200px] max-[640px]:w-[160px] max-[400px]:w-[130px]"
+            className="phone phone--right hidden md:block relative w-[240px] bg-[#0E0B09] rounded-[42px] p-[7px] flex-shrink-0 transition-transform duration-[350ms] max-[900px]:w-[200px]"
             style={{
               aspectRatio: '9 / 19.2',
               boxShadow:
