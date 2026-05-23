@@ -1,0 +1,16 @@
+@use 'reset';
+@use 'variables' as *;
+
+body {
+  font-family: $font-sans;
+  background-color: $color-bg;
+  color: $color-text;
+  font-size: $font-size-base;
+  line-height: 1.6;
+}
+
+#root {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}

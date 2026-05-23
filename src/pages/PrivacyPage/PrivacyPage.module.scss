@@ -1,0 +1,20 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.page {
+  @include container;
+  padding-top: $spacing-3xl;
+  padding-bottom: $spacing-3xl;
+  max-width: 720px;
+
+  h1 {
+    font-size: $font-size-4xl;
+    font-weight: 800;
+    margin-bottom: $spacing-lg;
+  }
+
+  p {
+    color: $color-text-muted;
+    line-height: 1.8;
+  }
+}

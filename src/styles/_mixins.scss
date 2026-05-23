@@ -1,0 +1,36 @@
+@use 'variables' as *;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin responsive($bp) {
+  @if $bp == sm { @media (max-width: #{$bp-sm}) { @content; } }
+  @else if $bp == md { @media (max-width: #{$bp-md}) { @content; } }
+  @else if $bp == lg { @media (max-width: #{$bp-lg}) { @content; } }
+  @else if $bp == xl { @media (max-width: #{$bp-xl}) { @content; } }
+}
+
+@mixin container {
+  width: 100%;
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-lg;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}

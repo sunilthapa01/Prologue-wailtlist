@@ -1,0 +1,40 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba($color-bg, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $color-border;
+}
+
+.inner {
+  @include container;
+  @include flex-between;
+  height: 64px;
+}
+
+.logo {
+  font-size: $font-size-xl;
+  font-weight: 700;
+  color: $color-text;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: $spacing-lg;
+}
+
+.link {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  transition: color $transition-fast;
+
+  &:hover,
+  &.active {
+    color: $color-text;
+  }
+}
