@@ -1,0 +1,48 @@
+@use '../../../styles/variables' as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  background: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $border-radius;
+  color: $color-text;
+  font-size: $font-size-base;
+  font-family: $font-sans;
+  transition: border-color $transition-fast;
+  outline: none;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.hasError {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+  }
+}
+
+.errorText {
+  font-size: $font-size-sm;
+  color: $color-error;
+  margin: 0;
+}
