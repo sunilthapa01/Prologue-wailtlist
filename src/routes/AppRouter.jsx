@@ -3,9 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import { ROUTES } from './routes';
 
-const WaitlistPage = lazy(() => import('../pages/WaitlistPage'));
-const PrivacyPage = lazy(() => import('../pages/PrivacyPage'));
-const NotFoundPage = lazy(() => import('../pages/NotFoundPage'));
+const WaitlistPage = lazy(() => import('../views/WaitlistPage'));
+const PrivacyPage = lazy(() => import('../views/PrivacyPage'));
+const NotFoundPage = lazy(() => import('../views/NotFoundPage'));
 
 const router = createBrowserRouter([
   {
