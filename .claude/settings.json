@@ -14,7 +14,10 @@
       "Bash(npx next *)",
       "Bash(curl -s -o /dev/null -w \"/ %{http_code}\\\\n\" http://localhost:3001/)",
       "Bash(curl -s -o /dev/null -w \"/privacy %{http_code}\\\\n\" http://localhost:3001/privacy)",
-      "Bash(curl -s -o /dev/null -w \"/terms %{http_code}\\\\n\" http://localhost:3001/terms)"
+      "Bash(curl -s -o /dev/null -w \"/terms %{http_code}\\\\n\" http://localhost:3001/terms)",
+      "Bash(git -C /home/sunil/Desktop/PrologueWaitlist ls-files .next)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ],
     "additionalDirectories": [
       "/home/sunil/Desktop/PrologueWaitlist"

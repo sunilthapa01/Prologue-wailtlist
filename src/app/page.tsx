@@ -1,104 +1,117 @@
-import Nav from '@/components/Nav'
-import SuccessModal from '@/components/SuccessModal'
-import WaitlistForm from '@/components/WaitlistForm'
-import DerivativeDemo from '@/components/DerivativeDemo'
-import PhoneShowcase from '@/components/PhoneShowcase'
-import CompareSection from '@/components/CompareSection'
-import HowItWorks from '@/components/HowItWorks'
-import Gallery from '@/components/Gallery'
-import FounderNote from '@/components/FounderNote'
-import Footer from '@/components/Footer'
+import Link from 'next/link'
+import Logo from '@/components/Logo'
+import type { Metadata } from 'next'
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: 'PrologLearn — Coming Soon',
+  description:
+    'An interactive visual learning platform launching soon. Join the waitlist to get early access.',
+}
+
+const features = [
+  {
+    number: '01',
+    title: 'Interactive Learning',
+    desc: 'Touch and manipulate ideas directly — no passive reading, no memorisation without understanding.',
+  },
+  {
+    number: '02',
+    title: 'Practical Projects',
+    desc: 'Apply knowledge through hands-on exploration that mirrors real-world challenges.',
+  },
+  {
+    number: '03',
+    title: 'Career Growth',
+    desc: 'Build skills that translate directly into opportunities in any field you choose.',
+  },
+  {
+    number: '04',
+    title: 'Modern Tech Skills',
+    desc: 'Stay ahead with curated, up-to-date skills shaped for a fast-changing world.',
+  },
+]
+
+export default function ComingSoon() {
   return (
-    <>
-      <Nav />
+    <div className="min-h-screen bg-parchment flex flex-col overflow-hidden relative">
+      {/* Ambient gradient orbs */}
+      <div className="cs-orb cs-orb-1" aria-hidden="true" />
+      <div className="cs-orb cs-orb-2" aria-hidden="true" />
 
-      {/* ── Hero ──────────────────────────────────────────────── */}
-      <header className="pt-10 sm:pt-[72px] pb-10 sm:pb-14 relative overflow-x-hidden">
-        <div className="max-w-[1200px] mx-auto px-5 sm:px-7">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
-            {/* Left column — Text content */}
-            <div className="lg:w-[55%] lg:flex-shrink-0">
-              {/* Eyebrow */}
-              <div className="inline-flex items-center gap-[10px] font-body text-[11px] sm:text-xs font-medium tracking-[1.6px] sm:tracking-[1.8px] uppercase text-muted mb-5 sm:mb-7">
-                <span className="w-[7px] h-[7px] rounded-full bg-brand shadow-[0_0_0_4px_rgba(193,63,37,0.16)] flex-shrink-0" />
-                Interactive learning, for any concept
-              </div>
-
-              {/* Headline */}
-              <h1 className="font-display font-normal text-[clamp(38px,9vw,82px)] leading-[0.98] sm:leading-[0.96] tracking-[-1px] sm:tracking-[-1.5px] m-0 mb-5 sm:mb-[26px] text-ink [text-wrap:balance]">
-                Understand anything
-                <br />
-                by <em className="italic text-brand">touching</em> it.
-              </h1>
-
-              {/* Lede */}
-              <p className="font-display text-[clamp(17px,2vw,24px)] leading-snug text-ink-soft max-w-[520px] mb-8 sm:mb-10 [text-wrap:pretty]">
-                Type any concept you don&apos;t quite grasp — at any grade, in any
-                subject. Prologue generates a living, touchable visual you can drag,
-                pull, and manipulate until the idea clicks.
-              </p>
-
-              {/* Hero waitlist form */}
-              <WaitlistForm
-                formId="hero-form"
-                inputId="hero-email"
-                successId="hero-success"
-                submitLabel="Join the waitlist"
-                successMessage="We'll email you the moment your spot opens up. No spam, promise."
-              />
-
-            </div>
-
-            {/* Right column — Live derivative demo */}
-            <div className="lg:w-[45%] mt-10 lg:mt-0">
-              <DerivativeDemo />
-            </div>
-          </div>
-        </div>
+      {/* Header */}
+      <header className="relative z-10 px-6 sm:px-10 py-5 flex justify-center border-b border-rule/40">
+        <Logo size={26} />
       </header>
 
-      {/* ── Device Showcase ───────────────────────────────────── */}
-      <PhoneShowcase />
+      {/* Hero */}
+      <main className="flex-1 flex flex-col items-center justify-center px-5 text-center relative z-10 py-12 sm:py-16">
 
-      {/* ── Compare strip ─────────────────────────────────────── */}
-      <CompareSection />
-
-      {/* ── How It Works ──────────────────────────────────────── */}
-    <HowItWorks />
-
-      {/* ── Examples Gallery ──────────────────────────────────── */}
-      <Gallery />
-
-      {/* ── Founder Note ──────────────────────────────────────── */}
-      <FounderNote />
-
-      {/* ── Final CTA ─────────────────────────────────────────── */}
-      <section className="text-center pt-14 sm:pt-[120px] pb-16 sm:pb-[100px]" id="join">
-        <div className="max-w-[720px] mx-auto px-5 sm:px-7">
-          <h2 className="font-display font-normal text-[clamp(40px,9vw,88px)] leading-[0.95] tracking-[-1px] sm:tracking-[-1.5px] mb-6 sm:mb-[28px] [text-wrap:balance]">
-            Be one of the first
-            <br />
-            to <em className="italic text-brand">understand</em>.
-          </h2>
-          <p className="font-display text-[clamp(17px,2.2vw,26px)] leading-snug text-ink-soft mx-auto mb-8 sm:mb-9 [text-wrap:pretty]">
-            Join the first learners exploring a more interactive way to understand
-            ideas. Early access is limited while we carefully shape the experience.
-          </p>
-          <WaitlistForm
-            formId="final-form"
-            inputId="final-email"
-            successId="final-success"
-            submitLabel="Save my spot"
-            successMessage="Welcome. We'll be in touch soon."
-            centered
-          />
+        {/* Eyebrow */}
+        <div className="cs-fade inline-flex items-center gap-[10px] font-body text-[11px] font-medium tracking-[1.8px] uppercase text-muted mb-7">
+          <span className="w-[7px] h-[7px] rounded-full bg-brand animate-pulse-ring flex-shrink-0" />
+          Launching Soon
         </div>
-      </section>
 
-      <Footer />
-      <SuccessModal />
-    </>
+        {/* Headline */}
+        <h1 className="cs-fade cs-fade-d1 font-display text-[clamp(38px,8.5vw,84px)] leading-[0.96] tracking-[-1.5px] sm:tracking-[-2px] text-ink [text-wrap:balance] max-w-[820px] mb-6 sm:mb-8">
+          The Future of Learning
+          <br />
+          is <em className="italic text-brand">Coming Soon</em>
+        </h1>
+
+        {/* Description */}
+        <p className="cs-fade cs-fade-d2 font-body text-[clamp(16px,2vw,20px)] leading-relaxed text-ink-soft max-w-[540px] mb-10 [text-wrap:pretty]">
+          PrologLearn is building an interactive, visual learning platform — where
+          you can touch, drag, and explore ideas until the moment they truly click.
+          Early access spots are limited.
+        </p>
+
+        {/* CTA */}
+        <div className="cs-fade cs-fade-d3 flex flex-col sm:flex-row items-center gap-4 mb-7">
+          <Link href="/waitlistpage" className="cs-btn">
+            Join the Waitlist
+          </Link>
+        </div>
+
+        {/* URL reference */}
+        <p className="cs-fade cs-fade-d4 font-body text-[13px] text-muted">
+          or visit&nbsp;
+          <a
+            href="https://www.prologlearn.com/waitlistpage"
+            className="text-brand underline underline-offset-2 hover:text-[#A8351F] transition-colors"
+          >
+            www.prologlearn.com/waitlistpage
+          </a>
+        </p>
+
+        {/* Feature grid */}
+        <div className="cs-fade cs-fade-d5 w-full max-w-[940px] mt-16 sm:mt-20">
+          <div className="h-px bg-rule mb-12 sm:mb-14" />
+          <p className="font-body text-[11px] font-medium tracking-[1.8px] uppercase text-muted mb-8">
+            What to Expect
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 text-left">
+            {features.map((f) => (
+              <div key={f.number} className="cs-card">
+                <span className="font-body font-semibold text-[11px] tracking-[1.4px] uppercase text-brand mb-3 block">
+                  {f.number}
+                </span>
+                <h3 className="font-body font-semibold text-ink text-[15px] mb-2 leading-snug">
+                  {f.title}
+                </h3>
+                <p className="font-body text-muted text-[13px] leading-relaxed">
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="relative z-10 text-center py-8 font-body text-muted text-sm border-t border-rule/40">
+        PrologLearn &copy; 2026. Launching Soon.
+      </footer>
+    </div>
   )
 }

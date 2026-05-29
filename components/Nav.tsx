@@ -50,7 +50,7 @@ export default function Nav() {
             </>
           )}
           <a
-            href={isLegalPage ? '/waitlist-page/#join' : '#join'}
+            href={isLegalPage ? '/waitlistpage#join' : '#join'}
             onClick={() => {
               if (!isLegalPage) {
                 window.dispatchEvent(new CustomEvent('prologue:show-waitlist'))
