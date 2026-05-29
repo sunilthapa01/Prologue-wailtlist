@@ -3,6 +3,7 @@ import { Instrument_Serif, Caveat } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className="bg-parchment text-ink font-body">
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   )
