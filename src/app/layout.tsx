@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Instrument_Serif, Caveat } from 'next/font/google'
 import { GeistSans } from 'geist/font/sans'
 import { GeistMono } from 'geist/font/mono'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
 const instrumentSerif = Instrument_Serif({
@@ -40,7 +41,10 @@ export default function RootLayout({
       lang="en"
       className={`${instrumentSerif.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable}`}
     >
-      <body className="bg-parchment text-ink font-body">{children}</body>
+      <body className="bg-parchment text-ink font-body">
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   )
 }
